@@ -69,7 +69,6 @@ public class CryptographyHelper {
         byte[] output = new byte[0];
 
         try {
-
             // Using Bouncy Castle for ECC
             signature = Signature.getInstance("ECDSA", "BC");
 
