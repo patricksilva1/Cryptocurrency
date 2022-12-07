@@ -35,7 +35,7 @@ public class CryptographyHelper {
             return hexadecimalString.toString();
 
         } catch (Exception e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -58,6 +58,31 @@ public class CryptographyHelper {
         } catch (Exception e) {
             throw new RuntimeException();
         }
+    }
+
+    // ECC to sign the given transaction (message)
+    // Elliptic Curve Digital Signature Algorithm (ECDSA)
+    public static byte[] sign(PrivateKey privateKey, String input) {
+
+        Signature signature;
+
+        byte[] output = new byte[0];
+
+        try {
+
+            // Using Bouncy Castle for ECC
+            signature = Signature.getInstance("ECDSA", "BC");
+
+            signature.initSign(privateKey);
+
+            signature.update(input.getBytes());
+
+            output = signature.sign();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return output;
     }
 
 }
