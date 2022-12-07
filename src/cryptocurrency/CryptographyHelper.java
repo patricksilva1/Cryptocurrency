@@ -84,4 +84,22 @@ public class CryptographyHelper {
         return output;
     }
 
+    // Checks whether the given transaction belongs to the sender based on the
+    // signature
+    public static boolean verify(PublicKey publicKey, String data, byte[] signature) {
+
+        try {
+
+            Signature ecdsaSignature = Signature.getInstance("ECDSA", "BC");
+
+            ecdsaSignature.initVerify(publicKey);
+
+            ecdsaSignature.update(data.getBytes());
+
+            return ecdsaSignature.verify(signature);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
