@@ -14,7 +14,6 @@ public class CryptographyHelper {
     public static String generateHash(String data) {
 
         try {
-
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
 
             byte[] hash = digest.digest(data.getBytes("UTF-8"));
@@ -36,7 +35,7 @@ public class CryptographyHelper {
             return hexadecimalString.toString();
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
     }
 
