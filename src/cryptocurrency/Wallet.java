@@ -11,7 +11,12 @@ import blockchain.Blockchain;
 
 public class Wallet {
 
+    // Users of the network
+    // Used for signature
     private PrivateKey privateKey;
+
+    // Verification
+    // Address: RIPMD public key (160 bits)
     private PublicKey publicKey;
 
     public Wallet() {
@@ -20,6 +25,8 @@ public class Wallet {
         this.publicKey = keyPair.getPublic();
     }
 
+    // We are able to transfer money
+    // Miners of the Blockchain will put this transaction into the blockchain
     public Transaction transferMoney(PublicKey receiver, double amount) {
         if (calculateBalance() < amount) {
             System.out.println("Invalid Transaction because of not enough money...");
@@ -27,8 +34,10 @@ public class Wallet {
             return null;
         }
 
+        // We store the inputs for the transaction in this array
         List<TransactionInput> inputs = new ArrayList<TransactionInput>();
 
+        // Let's find our unspent transactions (The blockchain stores all the UTXOs)
         for (Map.Entry<String, TransactionOutput> item : Blockchain.UTXOs.entrySet()) {
 
             TransactionOutput UTXO = item.getValue();
@@ -38,13 +47,17 @@ public class Wallet {
             }
         }
 
+        // Let's create the new transaction
         Transaction newTransaction = new Transaction(publicKey, receiver, amount, inputs);
 
+        // The sender signs the transaction
         newTransaction.generateSignature(privateKey);
 
         return newTransaction;
     }
 
+    // There is no balance associated with the users
+    // UTXOs and consider all the transactions in the past
     private double calculateBalance() {
 
         double balance = 0;
