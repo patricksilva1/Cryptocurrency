@@ -89,7 +89,6 @@ public class CryptographyHelper {
     public static boolean verify(PublicKey publicKey, String data, byte[] signature) {
 
         try {
-
             Signature ecdsaSignature = Signature.getInstance("ECDSA", "BC");
 
             ecdsaSignature.initVerify(publicKey);
