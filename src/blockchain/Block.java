@@ -47,7 +47,7 @@ public class Block {
                 return false;
             }
         }
-        transaction.add(transaction);
+        transactions.add(transaction);
 
         System.out.println("Transaction is valid ant it's added to the block " + this);
 
