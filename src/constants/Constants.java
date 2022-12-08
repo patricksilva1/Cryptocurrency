@@ -7,7 +7,7 @@ public class Constants {
     }
 
     // Leading zeros
-    public static final int DIFFICULTY = 7;
+    public static final int DIFFICULTY = 6;
 
     // Genesis block
     public static final String GENESIS_PREV_HASH = "0000000000000000000000000000000000000000000000000000000000000000";

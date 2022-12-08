@@ -58,7 +58,7 @@ public class Wallet {
 
     // There is no balance associated with the users
     // UTXOs and consider all the transactions in the past
-    private double calculateBalance() {
+    public double calculateBalance() {
 
         double balance = 0;
 
